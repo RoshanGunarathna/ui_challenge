@@ -24,35 +24,60 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
     _products = [
       ProductModel(
         id: "02",
-        image: "assets/images/products/product_02.png",
+        image: ["assets/images/products/product_02.png"],
         name: "Lucky Jade Plant",
+        description:
+            "Plants make your life with minimal and happy love the plants more and enjoy life.",
         price: 12.99,
+        height: [30, 40],
+        temperature: [20, 25],
+        pot: "Ceramic Pot",
       ),
       ProductModel(
         id: "01",
-        image: "assets/images/products/product_01.png",
+        image: ["assets/images/products/product_01.png"],
+        description:
+            "Plants make your life with minimal and happy love the plants more and enjoy life.",
         name: "Snake Plants",
         price: 12.99,
+        height: [30, 40],
+        temperature: [20, 25],
+        pot: "Ceramic Pot",
       ),
       ProductModel(
         id: "04",
-        image: "assets/images/products/product_04.png",
+        image: ["assets/images/products/product_04.png"],
+        description:
+            "Plants make your life with minimal and happy love the plants more and enjoy life.",
         name: "Peperomia plant",
         shortDescription: "Super green",
         price: 12.99,
+        height: [30, 40],
+        temperature: [20, 25],
+        pot: "Ceramic Pot",
       ),
       ProductModel(
         id: "03",
-        image: "assets/images/products/product_03.png",
+        image: ["assets/images/products/product_03.png"],
         name: "Small Plant",
+        description:
+            "Plants make your life with minimal and happy love the plants more and enjoy life.",
         shortDescription: "Super green",
         price: 12.99,
+        height: [30, 40],
+        temperature: [20, 25],
+        pot: "Ceramic Pot",
       ),
       ProductModel(
         id: "05",
-        image: "assets/images/products/product_05.png",
+        image: ["assets/images/products/product_05.png"],
         name: "Plant",
+        description:
+            "Plants make your life with minimal and happy love the plants more and enjoy life.",
         price: 12.99,
+        height: [30, 40],
+        temperature: [20, 25],
+        pot: "Ceramic Pot",
       ),
     ];
 

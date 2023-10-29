@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'onboard_screen.dart';
 import 'palette.dart';
+import 'product_detail_screen.dart';
 import 'search_product_screen.dart';
 
 void main() {
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primaryColor: Palette.primaryColor,
       ),
-      home: const SearchProductScreen(),
+      home: const ProductDetailScreen(),
     );
   }
 }
