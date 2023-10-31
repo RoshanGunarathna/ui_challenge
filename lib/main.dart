@@ -2,10 +2,8 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'onboard_screen.dart';
 import 'palette.dart';
 import 'product_detail_screen.dart';
-import 'search_product_screen.dart';
 
 void main() {
   runApp(

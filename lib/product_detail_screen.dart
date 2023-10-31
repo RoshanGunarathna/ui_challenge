@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'palette.dart';
 import 'product_model.dart';
@@ -15,6 +14,12 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final CarouselController _carouselController = CarouselController();
   int currentCarouselIndex = 0;
+
+  //For the animations
+  ScrollController listViewScrollController = ScrollController();
+  double carouselHeight = 355;
+
+  final totalPrice = 12.99;
   final ProductModel product = ProductModel(
     id: "01",
     image: [
@@ -24,14 +29,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     ],
     name: "Lucky-Jade-Plant",
     description:
-        "Plants make your life with minimal and happy love the plants more and enjoy life.",
+        "Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.",
     price: 12.99,
     height: [30, 35],
     temperature: [20, 25],
     pot: "Ceramic Pot",
   );
 
-  final totalPrice = 12.99;
   @override
   Widget build(BuildContext context) {
     const underCardTextStyle = TextStyle(
@@ -70,15 +74,26 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
         ],
       ),
-      body: Stack(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: SizedBox(
-                  height: 355,
-                  width: 270,
+          Center(
+            child: AnimatedContainer(
+              duration: const Duration(
+                milliseconds: 300,
+              ),
+              height: carouselHeight,
+              width: 270,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (carouselHeight != 355) {
+                      carouselHeight = 355;
+                    }
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
                   child: Stack(
                     children: [
                       Align(
@@ -92,11 +107,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                       CarouselSlider(
                         items: product.image.map((image) {
-                          // currentCarouselIndex = entry.key;
-
                           return Image.asset(
                             image,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                           );
                         }).toList(),
                         carouselController: _carouselController,
@@ -115,28 +128,52 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 30,
-                  left: 30,
-                  right: 30,
-                ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30,
+            ),
+            child: Text(
+              product.name,
+              style: const TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: 10,
+                left: 30,
+                right: 30,
+              ),
+              child: NotificationListener<ScrollUpdateNotification>(
+                onNotification: (ScrollNotification scrollInfo) {
+                  if (carouselHeight != 155 &&
+                      scrollInfo.metrics.pixels >= 10) {
+                    setState(() {
+                      carouselHeight = 155;
+                    });
+                  }
+
+                  if (carouselHeight != 355 && scrollInfo.metrics.pixels <= 0) {
+                    setState(() {
+                      carouselHeight = 355;
+                    });
+                  }
+                  return true;
+                },
                 child: ListView(
-                  shrinkWrap: true,
+                  controller: listViewScrollController,
                   children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      product.name,
-                      style: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
                     Text(
                       product.description,
                       style: const TextStyle(
@@ -148,161 +185,158 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ],
                 ),
               ),
-            ],
+            ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              height: 230,
-              width: double.infinity,
-              child: DecoratedBox(
-                decoration: const BoxDecoration(
-                  color: Palette.primaryColor,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(35),
-                  ),
+          SizedBox(
+            height: 230,
+            width: double.infinity,
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                color: Palette.primaryColor,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(35),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              const Icon(
-                                Icons.upload_rounded,
-                                color: Colors.white,
-                                size: 35,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                "Height",
-                                style: underCardTextStyle,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "${product.height[0].round()}cm - ${product.height[1].round()}cm",
-                                style: underCardTextStyle.copyWith(
-                                  fontSize: 12,
-                                  color: Colors.white60,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              const Icon(
-                                size: 35,
-                                Icons.thermostat_rounded,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                "Temperature",
-                                style: underCardTextStyle,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "${product.temperature[0].round()}\u2103 - ${product.temperature[1].round()}\u2103",
-                                style: underCardTextStyle.copyWith(
-                                  fontSize: 10,
-                                  color: Colors.white60,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              const Icon(
-                                size: 35,
-                                Icons.grass_rounded,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                "Pot",
-                                style: underCardTextStyle,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                product.pot,
-                                style: underCardTextStyle.copyWith(
-                                  fontSize: 12,
-                                  color: Colors.white60,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            const Icon(
+                              Icons.upload_rounded,
+                              color: Colors.white,
+                              size: 35,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Total Price",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  "\$$totalPrice",
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                            const SizedBox(
+                              height: 5,
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 75,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                color: Palette.primaryDark,
-                                borderRadius: BorderRadius.circular(20),
+                            const Text(
+                              "Height",
+                              style: underCardTextStyle,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "${product.height[0].round()}cm - ${product.height[1].round()}cm",
+                              style: underCardTextStyle.copyWith(
+                                fontSize: 12,
+                                color: Colors.white60,
                               ),
-                              child: const Text(
-                                "Add to Cart",
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            const Icon(
+                              size: 35,
+                              Icons.thermostat_rounded,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Text(
+                              "Temperature",
+                              style: underCardTextStyle,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "${product.temperature[0].round()}\u2103 - ${product.temperature[1].round()}\u2103",
+                              style: underCardTextStyle.copyWith(
+                                fontSize: 10,
+                                color: Colors.white60,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            const Icon(
+                              size: 35,
+                              Icons.grass_rounded,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Text(
+                              "Pot",
+                              style: underCardTextStyle,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              product.pot,
+                              style: underCardTextStyle.copyWith(
+                                fontSize: 12,
+                                color: Colors.white60,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Total Price",
                                 style: TextStyle(
-                                  color: Palette.fontColorWhite,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
                                 ),
+                              ),
+                              Text(
+                                "\$$totalPrice",
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 75,
+                            width: 180,
+                            decoration: BoxDecoration(
+                              color: Palette.primaryDark,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Text(
+                              "Add to Cart",
+                              style: TextStyle(
+                                color: Palette.fontColorWhite,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
