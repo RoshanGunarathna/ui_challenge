@@ -23,9 +23,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final ProductModel product = ProductModel(
     id: "01",
     image: [
-      "assets/images/products/product_02.png",
-      "assets/images/products/product_02_01.png",
-      "assets/images/products/product_02_02.png",
+      "assets/images/products/product_01_00.png",
+      "assets/images/products/product_01_01.png",
+      "assets/images/products/product_01_02.png",
     ],
     name: "Lucky-Jade-Plant",
     description:

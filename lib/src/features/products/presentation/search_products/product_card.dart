@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../palette.dart';
 import '../../domain/product_model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -18,7 +19,7 @@ class ProductCard extends StatelessWidget {
     final Widget card = Transform.translate(
       offset: Offset(
         0.0,
-        index.isEven ? 100 : 0.0,
+        index.isEven ? 85 : 0.0,
       ),
       child: Card(
         elevation: 0,
@@ -26,31 +27,33 @@ class ProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(14.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Image.asset(
                   product.image[0],
                   fit: BoxFit.contain,
                   height: 80,
                 ),
               ),
-              Expanded(
-                flex: 1,
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 20,
+                  left: 5,
+                  right: 5,
+                  bottom: 5,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
                     Text(
                       product.name,
                       style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
@@ -103,20 +106,26 @@ class ProductCard extends StatelessWidget {
     if (index == 0) {
       return Stack(
         children: [
-          SizedBox(
-            width: 200,
+          card,
+          Container(
+            padding: const EdgeInsets.only(
+              left: 8,
+              // top: 8,
+            ),
             height: 75,
+            alignment: Alignment.bottomLeft,
             child: Text(
               "Found \n$productListLength Results",
-              maxLines: 2,
+              //maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+                color: Palette.blackColor,
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+                height: 1.2,
               ),
             ),
           ),
-          card,
         ],
       );
     }
