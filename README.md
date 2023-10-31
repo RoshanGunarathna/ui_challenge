@@ -12,11 +12,12 @@ To get started with this project, follow these steps:
 
 ## Videos
 
-https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/98778197-576a-46af-99db-a026a02343cc
+https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/9b54c12c-d45d-4f4a-8766-08fedbe5d910
 
-https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/0107148d-e57f-452a-a23e-8efcbd984154
+https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/39cb50ff-c20a-4de4-9fb0-4aa27b68a422
 
-https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/7a6a74bc-8920-45fc-8901-931011a011e4
+https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/b83e5682-2a8e-4424-9ed2-e94b1fc57256
+
 
 
 
