@@ -1,16 +1,16 @@
-# ui_challenge
+# Flutter App Project - HeyFlutter UI Challenge
 
-A new Flutter project.
+This Flutter application was developed for a competition conducted by [heyflutter.com](https://www.youtube.com/live/aERczKh_uMk?si=jNwtTwSpQC35UeZ0). The challenge involved creating an app from three provided images using Flutter. 
 
-## Getting Started
+## Installation Instructions
 
-This project is a starting point for a Flutter application.
+To get started with this project, follow these steps:
 
-A few resources to get you started if this is your first Flutter project:
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Install dependencies.
+4. Run the app.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## GIFs
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
