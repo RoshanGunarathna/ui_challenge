@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui_challenge/product_model.dart';
+
+import '../../domain/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;

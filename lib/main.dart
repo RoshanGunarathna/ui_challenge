@@ -2,8 +2,10 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'palette.dart';
-import 'product_detail_screen.dart';
+import 'src/features/onboard/onboard_screen.dart';
+import 'src/features/products/presentation/product_details/product_detail_screen.dart';
+import 'src/features/products/presentation/search_products/search_product_screen.dart';
+import 'src/palette.dart';
 
 void main() {
   runApp(
@@ -32,7 +34,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primaryColor: Palette.primaryColor,
       ),
-      home: const ProductDetailScreen(),
+      home: const OnboardScreen(),
+      //home: const SearchProductScreen(),
+      //home: const ProductDetailScreen(),
     );
   }
 }

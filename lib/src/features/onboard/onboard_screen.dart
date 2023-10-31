@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 //Local file imports
-import 'palette.dart';
-import 'custom_icons.dart';
+import '../../palette.dart';
+import '../../custom_icons.dart';
 
 class OnboardScreen extends StatefulWidget {
   const OnboardScreen({super.key});
@@ -78,7 +78,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 fontSize: 18,
                 fontWeight: FontWeight.w300,
                 fontFamily: 'Caros-Soft',
-                color: Colors.black,
+                color: Palette.fontColorBlack,
               ),
             ),
           ),
@@ -163,7 +163,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w300,
                                   fontSize: 40,
-                                  color: Colors.black,
+                                  color: Palette.fontColorBlack,
                                 ),
                               ),
                               RichText(
@@ -172,7 +172,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w300,
                                     fontSize: 40,
-                                    color: Colors.black,
+                                    color: Palette.fontColorBlack,
                                     fontFamily: 'Caros-Soft',
                                   ),
                                   children: [
@@ -184,7 +184,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 40,
-                                        color: Colors.black,
+                                        color: Palette.fontColorBlack,
                                         fontFamily: 'Caros-Soft',
                                       ),
                                     ),
@@ -217,7 +217,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                   AppIcons.arrow_right,
                   weight: 20,
                   size: 45,
-                  color: Colors.white,
+                  color: Palette.whiteColor,
                 ),
               ),
             ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'palette.dart';
+import '../../../../palette.dart';
+import '../../domain/product_model.dart';
+
 import 'product_card.dart';
-import 'product_model.dart';
 
 class SearchProductScreen extends StatefulWidget {
   const SearchProductScreen({super.key});
