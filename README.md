@@ -16,7 +16,7 @@ https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/9b54c12c-d45d-
 
 https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/5bb77db4-4c89-4063-a0b2-e7da5ec4bbd5
 
-https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/e11b85c5-4fcc-47b3-ba5e-195ac255ce9c
+https://github.com/RoshanGunarathna/ui_challenge/assets/105094516/5d501bc2-d3b2-412d-961b-3fbfbbfb1116
 
 
 
