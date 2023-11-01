@@ -34,9 +34,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primaryColor: Palette.primaryColor,
       ),
-      // home: const OnboardScreen(),
-      home: const SearchProductScreen(),
-      //home: const ProductDetailScreen(),
+      //home: const OnboardScreen(),
+      //home: const SearchProductScreen(),
+      home: const ProductDetailScreen(),
     );
   }
 }

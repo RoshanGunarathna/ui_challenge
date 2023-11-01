@@ -16,17 +16,17 @@ class _OnboardScreenState extends State<OnboardScreen> {
   // List of page's content
   final List<Map<String, dynamic>> pagesContent = [
     {
-      "image": "assets/images/onboard/product_01.png",
+      "image": "assets/images/onboard/onboard_image_01.png",
       "firstLineText": "Enjoy your",
       "secondLineText": {"regularText": "Life with", "boldText": "Plants"},
     },
     {
-      "image": "assets/images/onboard/product_02.png",
+      "image": "assets/images/onboard/onboard_image_02.png",
       "firstLineText": "Discover",
       "secondLineText": {"regularText": "New", "boldText": "Varieties"},
     },
     {
-      "image": "assets/images/onboard/product_03.png",
+      "image": "assets/images/onboard/onboard_image_03.png",
       "firstLineText": "Create a",
       "secondLineText": {"regularText": "Green", "boldText": "Oasis"},
     }

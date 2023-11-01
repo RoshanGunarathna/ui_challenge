@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../palette.dart';
 import '../../domain/product_model.dart';
@@ -39,7 +40,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     const underCardTextStyle = TextStyle(
-      fontSize: 12,
+      fontSize: 13,
       color: Colors.white,
       fontWeight: FontWeight.w600,
     );
@@ -63,10 +64,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           IconButton(
             padding: EdgeInsets.zero,
             onPressed: () {},
-            icon: const Icon(
-              Icons.shopping_cart_outlined,
-              size: 28,
-              color: Colors.black,
+            icon: SvgPicture.asset(
+              "assets/icons/cart_icon.svg",
+              // colorFilter: const ColorFilter.mode(
+              //   Color.fromARGB(255, 134, 134, 134),
+              //   BlendMode.srcIn,
+              // ),
+              height: 28,
             ),
           ),
           const SizedBox(
@@ -194,7 +198,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               decoration: const BoxDecoration(
                 color: Palette.primaryColor,
                 borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(35),
+                  top: Radius.circular(40),
                 ),
               ),
               child: Padding(
@@ -207,10 +211,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: [
                         Column(
                           children: [
-                            const Icon(
-                              Icons.upload_rounded,
-                              color: Colors.white,
-                              size: 35,
+                            SvgPicture.asset(
+                              "assets/icons/height_icon.svg",
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                              height: 35,
                             ),
                             const SizedBox(
                               height: 5,
@@ -233,10 +240,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Column(
                           children: [
-                            const Icon(
-                              size: 35,
-                              Icons.thermostat_rounded,
-                              color: Colors.white,
+                            SvgPicture.asset(
+                              "assets/icons/temperature_icon.svg",
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                              height: 35,
                             ),
                             const SizedBox(
                               height: 5,
@@ -259,10 +269,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Column(
                           children: [
-                            const Icon(
-                              size: 35,
-                              Icons.grass_rounded,
-                              color: Colors.white,
+                            SvgPicture.asset(
+                              "assets/icons/plant_pot_icon.svg",
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                              height: 35,
                             ),
                             const SizedBox(
                               height: 5,
@@ -328,8 +341,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               "Add to Cart",
                               style: TextStyle(
                                 color: Palette.fontColorWhite,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17,
                               ),
                             ),
                           ),
