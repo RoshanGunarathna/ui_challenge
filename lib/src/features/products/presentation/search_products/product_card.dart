@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../palette.dart';
+import '../../../../constants/palette.dart';
 import '../../domain/product_model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -119,7 +119,7 @@ class ProductCard extends StatelessWidget {
               //maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                color: Palette.blackColor,
+                // color: Palette.blackColor,
                 fontSize: 28,
                 fontWeight: FontWeight.w600,
                 height: 1.2,

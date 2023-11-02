@@ -1,9 +1,14 @@
+//pub package imports
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 //Default package imports
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 //Local file imports
-import '../../palette.dart';
+import '../../constants/palette.dart';
 import '../../custom_icons.dart';
+import 'package:ui_challenge/src/constants/assets_path.dart';
 
 class OnboardScreen extends StatefulWidget {
   const OnboardScreen({super.key});
@@ -16,30 +21,40 @@ class _OnboardScreenState extends State<OnboardScreen> {
   // List of page's content
   final List<Map<String, dynamic>> pagesContent = [
     {
-      "image": "assets/images/onboard/onboard_image_01.png",
+      "image": AssetsPath.kOnboardScreenImage1,
       "firstLineText": "Enjoy your",
       "secondLineText": {"regularText": "Life with", "boldText": "Plants"},
     },
     {
-      "image": "assets/images/onboard/onboard_image_02.png",
+      "image": AssetsPath.kOnboardScreenImage2,
       "firstLineText": "Discover",
       "secondLineText": {"regularText": "New", "boldText": "Varieties"},
     },
     {
-      "image": "assets/images/onboard/onboard_image_03.png",
+      "image": AssetsPath.kOnboardScreenImage3,
       "firstLineText": "Create a",
       "secondLineText": {"regularText": "Green", "boldText": "Oasis"},
     }
   ];
 
-  //Current page index
   int currentPageIndex = 0;
+  //pageController for image
   final PageController _imagePageController = PageController(
     viewportFraction: 1.0,
   );
+
+  //pageController for content
   final PageController _contentPageController = PageController(
     viewportFraction: 1.0,
   );
+
+  @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    super.initState();
+  }
 
   //Function to handle the next button press
   void nextButtonPress() {
@@ -59,37 +74,39 @@ class _OnboardScreenState extends State<OnboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Palette.backgroundColor,
-        toolbarHeight: 50,
-        leading: IconButton(
-          padding: const EdgeInsets.all(0),
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_back),
+        primary: true,
+        backgroundColor: Palette.kBackgroundPrimaryColor,
+        leading: Padding(
+          padding: EdgeInsets.only(
+            left: 20.w,
+          ),
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.arrow_back_ios_new),
+          ),
         ),
         actions: [
           TextButton(
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-            ),
             onPressed: () {},
-            child: const Text(
+            child: Text(
               "Skip",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w300,
-                fontFamily: 'Caros-Soft',
-                color: Palette.fontColorBlack,
               ),
             ),
           ),
+          SizedBox(
+            width: 20.w,
+          ),
         ],
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
+            SizedBox(
+              height: 350.h,
               child: PageView.builder(
                 controller: _imagePageController,
                 onPageChanged: (int index) {
@@ -101,107 +118,86 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 itemCount: pagesContent.length,
                 itemBuilder: (context, index) {
                   final Map<String, dynamic> item = pagesContent[index];
-                  return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Image.asset(
-                          item["image"],
-                          height: 370,
-                        ),
-                        const SizedBox(
-                          height: 45,
-                        ),
-                      ],
-                    ),
+                  return Image.asset(
+                    item["image"],
                   );
                 },
               ),
             ),
+            SizedBox(
+              height: 40.h,
+            ),
             dottedIndicator(currentPageIndex),
             SizedBox(
-              height: 185,
-              child: PageView.builder(
-                controller: _contentPageController,
-                onPageChanged: (int index) {
-                  setState(() {
-                    _imagePageController.jumpToPage(index);
-                    currentPageIndex = index;
-                  });
-                },
-                itemCount: pagesContent.length,
-                itemBuilder: (context, index) {
-                  final Map<String, dynamic> item = pagesContent[index];
-                  final String firstLineText = item["firstLineText"];
-                  final String secondLineRegularText =
-                      item["secondLineText"]["regularText"];
-                  final String secondLineBoldText =
-                      item["secondLineText"]["boldText"];
-                  return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+              height: 45.h,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 40.w),
+              child: SizedBox(
+                height: 130.h,
+                child: PageView.builder(
+                  controller: _contentPageController,
+                  onPageChanged: (int index) {
+                    setState(() {
+                      _imagePageController.jumpToPage(index);
+                      currentPageIndex = index;
+                    });
+                  },
+                  itemCount: pagesContent.length,
+                  itemBuilder: (context, index) {
+                    final Map<String, dynamic> item = pagesContent[index];
+                    final String firstLineText = item["firstLineText"];
+                    final String secondLineRegularText =
+                        item["secondLineText"]["regularText"];
+                    final String secondLineBoldText =
+                        item["secondLineText"]["boldText"];
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 35,
+                        Text(
+                          firstLineText,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            fontSize: 40.sp,
+                            height: 1.3.h,
+                          ),
                         ),
-                        SizedBox(
-                          width: 300,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        RichText(
+                          text: TextSpan(
+                            text: secondLineRegularText,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 40.sp,
+                              color: Palette.kFontPrimaryColor,
+                              fontFamily: 'Caros-Soft',
+                              height: 1.2.h,
+                            ),
                             children: [
-                              Text(
-                                firstLineText,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 40,
-                                  color: Palette.fontColorBlack,
-                                ),
+                              WidgetSpan(
+                                child: SizedBox(width: 10.w),
                               ),
-                              RichText(
-                                text: TextSpan(
-                                  text: secondLineRegularText,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 40,
-                                    color: Palette.fontColorBlack,
-                                    fontFamily: 'Caros-Soft',
-                                  ),
-                                  children: [
-                                    const WidgetSpan(
-                                      child: SizedBox(width: 10),
-                                    ),
-                                    TextSpan(
-                                      text: secondLineBoldText,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 40,
-                                        color: Palette.fontColorBlack,
-                                        fontFamily: 'Caros-Soft',
-                                      ),
-                                    ),
-                                  ],
+                              TextSpan(
+                                text: secondLineBoldText,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 40.sp,
+                                  color: Palette.kFontPrimaryColor,
+                                  fontFamily: 'Caros-Soft',
+                                  height: 1.2.h,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 40,
-                        ),
                       ],
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
+            ),
+            SizedBox(
+              height: 20.h,
             ),
             Center(
               child: IconButton(
@@ -209,15 +205,14 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 padding: const EdgeInsets.all(0.0),
                 onPressed: nextButtonPress,
                 style: IconButton.styleFrom(
-                  backgroundColor: Palette.primaryColor,
+                  backgroundColor: Palette.kButtonPrimaryColor,
                   shape: const CircleBorder(),
                   padding: const EdgeInsets.all(25),
                 ),
-                icon: const Icon(
+                icon: Icon(
                   AppIcons.arrow_right,
-                  weight: 20,
-                  size: 45,
-                  color: Palette.whiteColor,
+                  size: 45.sp,
+                  color: Palette.kIconColorWhite,
                 ),
               ),
             ),
@@ -234,14 +229,14 @@ class _OnboardScreenState extends State<OnboardScreen> {
       children: List.generate(
         pagesContent.length,
         (index) => Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3.0),
-          width: currentPageIndex == index ? 18.0 : 6.0,
-          height: 6,
+          margin: EdgeInsets.symmetric(horizontal: 3.0.w),
+          width: currentPageIndex == index ? 18.0.w : 6.0.w,
+          height: 6.h,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(20.0.r),
             color: currentPageIndex == index
-                ? Palette.primaryColor
-                : Palette.grayColor,
+                ? Palette.kPrimaryColor
+                : Palette.kGrayColor,
           ),
         ),
       ),

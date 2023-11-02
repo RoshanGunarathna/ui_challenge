@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../palette.dart';
+import '../../../../constants/palette.dart';
 import '../../domain/product_model.dart';
 import 'dart:math' as math;
 
@@ -151,7 +151,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
         shadowColor: Colors.transparent,
         scrolledUnderElevation: 0,
         leadingWidth: 0,
-        backgroundColor: Palette.backgroundColor,
+        //backgroundColor: Palette.backgroundColor,
         toolbarHeight: 55,
         leading: Padding(
           padding: const EdgeInsets.only(left: 30),
@@ -197,7 +197,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
               floating: true,
               automaticallyImplyLeading: false,
               toolbarHeight: 70,
-              backgroundColor: Palette.backgroundColor,
+              //backgroundColor: Palette.backgroundColor,
               title: PreferredSize(
                 preferredSize: const Size(double.infinity, 100),
                 child: Column(

@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../palette.dart';
+import '../../../../constants/palette.dart';
 import '../../domain/product_model.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -50,7 +50,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         shadowColor: Colors.transparent,
         scrolledUnderElevation: 0,
         leadingWidth: 0,
-        backgroundColor: Palette.backgroundColor,
+        //backgroundColor: Palette.backgroundColor,
         toolbarHeight: 55,
         leading: Padding(
           padding: const EdgeInsets.only(left: 30),
@@ -183,7 +183,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
-                        color: Palette.fontColorGray,
+                        color: Palette.kFontColorGray,
                       ),
                     ),
                   ],
@@ -196,7 +196,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             width: double.infinity,
             child: DecoratedBox(
               decoration: const BoxDecoration(
-                color: Palette.primaryColor,
+                color: Palette.kPrimaryColor,
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(40),
                 ),
@@ -334,13 +334,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             height: 75,
                             width: 180,
                             decoration: BoxDecoration(
-                              color: Palette.primaryDark,
+                              color: Palette.kPrimaryDark,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: const Text(
                               "Add to Cart",
                               style: TextStyle(
-                                color: Palette.fontColorWhite,
+                                color: Palette.kFontColorWhite,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 17,
                               ),
@@ -373,8 +373,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
             color: currentCarouselIndex == index
-                ? Palette.primaryColor
-                : Palette.grayColor,
+                ? Palette.kPrimaryColor
+                : Palette.kGrayColor,
           ),
         ),
       ),
