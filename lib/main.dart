@@ -39,9 +39,9 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const OnboardScreen(),
-      // const SearchProductScreen(),
-      // const ProductDetailScreen(),
+      // child: const OnboardScreen(),
+      child: const SearchProductScreen(),
+      // child: const ProductDetailScreen(),
     );
   }
 }

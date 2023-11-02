@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../../constants/assets_path.dart';
 import '../../../../constants/palette.dart';
 import '../../domain/product_model.dart';
-import 'dart:math' as math;
 
 import 'product_card.dart';
 
@@ -17,8 +20,6 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
   late final TextEditingController _searchController;
   late final List<ProductModel> _products;
 
-  bool enableSearchResultCountWidget = false;
-
   @override
   void initState() {
     _searchController = TextEditingController();
@@ -27,7 +28,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
     _products = [
       ProductModel(
         id: "01",
-        image: ["assets/images/products/product_01_00.png"],
+        image: [AssetsPath.kProductImage1],
         name: "Lucky Jade Plant",
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
@@ -38,7 +39,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "02",
-        image: ["assets/images/products/product_02.png"],
+        image: [AssetsPath.kProductImage2],
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
         name: "Snake Plants",
@@ -49,7 +50,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "03",
-        image: ["assets/images/products/product_03.png"],
+        image: [AssetsPath.kProductImage3],
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
         name: "Peperomia plant",
@@ -61,7 +62,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "04",
-        image: ["assets/images/products/product_04.png"],
+        image: [AssetsPath.kProductImage4],
         name: "Small Plant",
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
@@ -73,7 +74,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "05",
-        image: ["assets/images/products/product_05.png"],
+        image: [AssetsPath.kProductImage5],
         name: "Plant",
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
@@ -84,7 +85,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "06",
-        image: ["assets/images/products/product_06.png"],
+        image: [AssetsPath.kProductImage6],
         name: "Plant",
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
@@ -95,7 +96,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "01",
-        image: ["assets/images/products/product_01_00.png"],
+        image: [AssetsPath.kProductImage1],
         name: "Lucky Jade Plant",
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
@@ -106,7 +107,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "02",
-        image: ["assets/images/products/product_02.png"],
+        image: [AssetsPath.kProductImage2],
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
         name: "Snake Plants",
@@ -117,7 +118,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "03",
-        image: ["assets/images/products/product_03.png"],
+        image: [AssetsPath.kProductImage3],
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
         name: "Peperomia plant",
@@ -129,7 +130,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ),
       ProductModel(
         id: "04",
-        image: ["assets/images/products/product_04.png"],
+        image: [AssetsPath.kProductImage4],
         name: "Small Plant",
         description:
             "Plants make your life with minimal and happy love the plants more and enjoy life.",
@@ -140,7 +141,9 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
         pot: "Ceramic Pot",
       ),
     ];
-
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+    ]);
     super.initState();
   }
 
@@ -148,40 +151,42 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 65.h,
         shadowColor: Colors.transparent,
         scrolledUnderElevation: 0,
         leadingWidth: 0,
-        //backgroundColor: Palette.backgroundColor,
-        toolbarHeight: 55,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 30),
+          padding: const EdgeInsets.only(left: 20).w,
           child: IconButton(
-            padding: EdgeInsets.zero,
             onPressed: () {},
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios_new),
           ),
         ),
         centerTitle: true,
-        title: const Text(
+        title: Text(
           "Search Products",
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 17.sp,
           ),
         ),
         actions: [
           Container(
             margin: const EdgeInsets.only(
-              right: 30,
-            ),
-            padding: const EdgeInsets.all(1.0),
-            height: 52,
-            width: 52,
+              right: 25,
+            ).w,
+            padding: const EdgeInsets.all(1.0).r,
+            height: 52.r,
+            width: 52.r,
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
+              color: Palette.kWhiteColor,
+              borderRadius: BorderRadius.circular(30).r,
             ),
             child: CircleAvatar(
-              child: Image.asset("assets/images/profile_pic.png"),
+              radius: 30.r,
+              child: Image.asset(
+                AssetsPath.kProfileImage,
+                height: 51.r,
+              ),
             ),
           ),
         ],
@@ -189,86 +194,78 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.only(top: 12, left: 12, right: 12),
+            padding: EdgeInsets.only(
+              left: 13.w,
+              right: 13.w,
+            ),
             sliver: SliverAppBar(
+              primary: false,
               elevation: 0,
               scrolledUnderElevation: 0,
               snap: true,
+              toolbarHeight: 65.h,
               floating: true,
               automaticallyImplyLeading: false,
-              toolbarHeight: 70,
-              //backgroundColor: Palette.backgroundColor,
               title: PreferredSize(
-                preferredSize: const Size(double.infinity, 100),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                preferredSize: Size(double.infinity, 100.h),
+                child: Row(
                   children: [
+                    Expanded(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Palette.kWhiteColor,
+                          borderRadius: BorderRadius.circular(14).r,
+                        ),
+                        child: TextField(
+                          textAlign: TextAlign.start,
+                          textAlignVertical: TextAlignVertical.center,
+                          controller: _searchController,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13.sp,
+                          ),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: IconButton(
+                              onPressed: () {},
+                              icon: SvgPicture.asset(
+                                AssetsPath.kSearchIcon,
+                                colorFilter: const ColorFilter.mode(
+                                  Palette.kIconColorGray,
+                                  BlendMode.srcIn,
+                                ),
+                                height: 15.r,
+                                width: 15.r,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    10.horizontalSpace,
                     SizedBox(
-                      height: 55,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(16),
+                      height: 46.h,
+                      width: 46.w,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Palette.kWhiteColor,
+                          borderRadius: BorderRadius.circular(14).r,
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Transform.flip(
+                            flipX: true,
+                            child: SvgPicture.asset(
+                              AssetsPath.kFilterIcon,
+                              colorFilter: const ColorFilter.mode(
+                                Palette.kIconPrimaryColor,
+                                BlendMode.srcIn,
                               ),
-                              child: TextField(
-                                controller: _searchController,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                ),
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  prefixIcon: IconButton(
-                                    onPressed: () {},
-                                    icon: SvgPicture.asset(
-                                      "assets/icons/search_icon.svg",
-                                      colorFilter: const ColorFilter.mode(
-                                        Color.fromARGB(255, 134, 134, 134),
-                                        BlendMode.srcIn,
-                                      ),
-                                      height: 15,
-                                    ),
-                                    // icon: const Icon(
-                                    //   Icons.search,
-                                    //   opticalSize: 1,
-                                    //   weight: 0.4,
-                                    // ),
-                                  ),
-                                ),
-                              ),
+                              height: 20.r,
+                              width: 20.r,
                             ),
                           ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            height: 50,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: Transform.flip(
-                                  flipX: true,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/filter_icon.svg",
-                                    colorFilter: const ColorFilter.mode(
-                                      Color.fromARGB(255, 59, 59, 59),
-                                      BlendMode.srcIn,
-                                    ),
-                                    height: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
@@ -278,14 +275,17 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
           ),
 
           SliverPadding(
-            padding: const EdgeInsets.only(top: 16, left: 25, right: 25),
+            padding: EdgeInsets.only(
+              top: 18.h,
+              left: 25.w,
+              right: 25.w,
+            ),
             sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
-                childAspectRatio: 1.9,
-                mainAxisExtent: 275,
+                mainAxisSpacing: 20.h,
+                crossAxisSpacing: 20.w,
+                childAspectRatio: (100.r / 2) / (172.r / 2),
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
@@ -303,10 +303,8 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
           ),
 
           //To fix the regression after add offset to Product Card widget
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 100,
-            ),
+          SliverToBoxAdapter(
+            child: 100.verticalSpace,
           ),
         ],
       ),

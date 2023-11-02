@@ -27,9 +27,11 @@ class CustomTheme {
         ),
         toolbarTextStyle: TextStyle(
           color: Palette.kIconPrimaryColor,
+          fontFamily: kPrimaryFontFamily,
         ),
         titleTextStyle: TextStyle(
           color: Palette.kIconPrimaryColor,
+          fontFamily: kPrimaryFontFamily,
         ),
       ),
 

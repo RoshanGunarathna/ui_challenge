@@ -19,6 +19,7 @@ class Palette {
   //icon colors
   static const Color kIconPrimaryColor = kBlackColor;
   static const Color kIconColorWhite = kWhiteColor;
+  static const Color kIconColorGray = kGrayColor;
 
   //button colors
   static const Color kButtonPrimaryColor = kPrimaryColor;
