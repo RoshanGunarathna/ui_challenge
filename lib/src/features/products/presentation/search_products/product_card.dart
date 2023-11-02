@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
+//pub package imports
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+//Default package imports
+import 'package:flutter/material.dart';
+
+//Local file imports
 import '../../domain/product_model.dart';
 
 class ProductCard extends StatelessWidget {

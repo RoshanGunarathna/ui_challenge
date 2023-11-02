@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//pub package imports
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+//Default package imports
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+//Local file imports
 import '../../../../constants/assets_path.dart';
 import '../../../../constants/palette.dart';
 import '../../domain/product_model.dart';
-
 import 'product_card.dart';
 
 class SearchProductScreen extends StatefulWidget {

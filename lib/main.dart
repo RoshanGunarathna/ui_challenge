@@ -10,6 +10,7 @@ import 'src/constants/palette.dart';
 import 'src/theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     DevicePreview(
       //enabled: false,
@@ -39,9 +40,9 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      // child: const OnboardScreen(),
-      child: const SearchProductScreen(),
-      // child: const ProductDetailScreen(),
+      child: const OnboardScreen(),
+      //child: const SearchProductScreen(),
+      //child: const ProductDetailScreen(),
     );
   }
 }

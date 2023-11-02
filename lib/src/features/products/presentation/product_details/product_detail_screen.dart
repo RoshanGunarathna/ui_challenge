@@ -1,9 +1,21 @@
+//pub package imports
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+//Default package imports
+import 'dart:ui';
+import 'package:flutter/material.dart';
+
+//Local file imports
+import '../../../../constants/assets_path.dart';
 import '../../../../constants/palette.dart';
 import '../../domain/product_model.dart';
+
+//!...DON"T USE DEVICE PREVIEW ON THIS SCREEN
+/*Don't use Device Preview on this widget because I'm using PlatformDispatcher
+ to get the device height before the widget is built. If you use Device Preview on this widget,
+  it will result in a 'Pixel overflow' error & widget functionality will not work correctly.*/
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
@@ -13,49 +25,70 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  final CarouselController _carouselController = CarouselController();
-  int currentCarouselIndex = 0;
+  late final CarouselController _carouselController;
+  late int currentCarouselIndex;
 
   //For the animations
-  ScrollController listViewScrollController = ScrollController();
-  double carouselHeight = 355;
+  late ScrollController listViewScrollController = ScrollController();
 
-  final totalPrice = 12.99;
-  final ProductModel product = ProductModel(
-    id: "01",
-    image: [
-      "assets/images/products/product_01_00.png",
-      "assets/images/products/product_01_01.png",
-      "assets/images/products/product_01_02.png",
-    ],
-    name: "Lucky-Jade-Plant",
-    description:
-        "Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.",
-    price: 12.99,
-    height: [30, 35],
-    temperature: [20, 25],
-    pot: "Ceramic Pot",
-  );
+  late double carouselHeightConstValue;
+  late double carouselHeight;
+
+  late final double totalPrice;
+  late final ProductModel product;
+
+  @override
+  void initState() {
+    _carouselController = CarouselController();
+    currentCarouselIndex = 0;
+    totalPrice = 12.99;
+
+    final height = MediaQueryData.fromView(
+            WidgetsBinding.instance.platformDispatcher.views.single)
+        .size
+        .height;
+    debugPrint("height: $height");
+    carouselHeightConstValue = height > 660.0 ? 355 : 255;
+    carouselHeight = carouselHeightConstValue;
+
+    product = ProductModel(
+      id: "01",
+      image: [
+        "assets/images/products/product_01_00.png",
+        "assets/images/products/product_01_01.png",
+        "assets/images/products/product_01_02.png",
+      ],
+      name: "Lucky-Jade-Plant",
+      description:
+          "Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life. Plants make your life with minimal and happy love the plants more and enjoy life.",
+      price: 12.99,
+      height: [30, 40],
+      temperature: [20, 25],
+      pot: "Ceramic Pot",
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    const underCardTextStyle = TextStyle(
-      fontSize: 13,
-      color: Colors.white,
+    //Bottom Card Text Styles
+    final bottomCardMainTextStyle = TextStyle(
+      fontSize: 13.sp,
+      color: Palette.kFontColorWhite,
       fontWeight: FontWeight.w600,
     );
+    final bottomCardSubtleTextStyle = TextStyle(
+      fontSize: 11.sp,
+      fontWeight: FontWeight.w300,
+      color: Palette.kFontColorWhite.withOpacity(0.9),
+    );
+
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        shadowColor: Colors.transparent,
-        scrolledUnderElevation: 0,
-        leadingWidth: 0,
-        //backgroundColor: Palette.backgroundColor,
-        toolbarHeight: 55,
+        toolbarHeight: 55.h,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 30),
+          padding: const EdgeInsets.only(left: 30).w,
           child: IconButton(
-            padding: EdgeInsets.zero,
             onPressed: () {},
             icon: const Icon(Icons.arrow_back_ios),
           ),
@@ -65,17 +98,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             padding: EdgeInsets.zero,
             onPressed: () {},
             icon: SvgPicture.asset(
-              "assets/icons/cart_icon.svg",
-              // colorFilter: const ColorFilter.mode(
-              //   Color.fromARGB(255, 134, 134, 134),
-              //   BlendMode.srcIn,
-              // ),
-              height: 28,
+              AssetsPath.kCartIcon,
+              height: 28.r,
+              width: 28.r,
             ),
           ),
-          const SizedBox(
-            width: 30.0,
-          ),
+          30.horizontalSpace,
         ],
       ),
       body: Column(
@@ -87,17 +115,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 milliseconds: 300,
               ),
               height: carouselHeight,
-              width: 270,
+              width: 270.w,
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (carouselHeight != 355) {
-                      carouselHeight = 355;
+                    if (carouselHeight != carouselHeightConstValue.h) {
+                      carouselHeight = carouselHeightConstValue.h;
                     }
                   });
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+                  padding: const EdgeInsets.only(bottom: 10).h,
                   child: Stack(
                     children: [
                       Align(
@@ -105,7 +133,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         child: Padding(
                           padding: const EdgeInsets.only(
                             right: 35,
-                          ),
+                          ).w,
                           child: dottedIndicator(currentCarouselIndex),
                         ),
                       ),
@@ -125,7 +153,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             });
                           },
                           viewportFraction: 1,
-                          height: 350,
+                          height: carouselHeightConstValue - 5.h,
                         ),
                       ),
                     ],
@@ -134,43 +162,40 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          10.verticalSpace,
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 30,
-            ),
+            ).w,
             child: Text(
               product.name,
-              style: const TextStyle(
-                fontSize: 25,
+              style: TextStyle(
+                fontSize: 25.sp,
                 fontWeight: FontWeight.w700,
               ),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          20.verticalSpace,
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(
-                bottom: 10,
-                left: 30,
-                right: 30,
+              padding: EdgeInsets.only(
+                bottom: 10.h,
+                left: 30.w,
+                right: 30.w,
               ),
               child: NotificationListener<ScrollUpdateNotification>(
                 onNotification: (ScrollNotification scrollInfo) {
-                  if (carouselHeight != 155 &&
+                  if (carouselHeight != 155.h &&
                       scrollInfo.metrics.pixels >= 10) {
                     setState(() {
-                      carouselHeight = 155;
+                      carouselHeight = 155.h;
                     });
                   }
 
-                  if (carouselHeight != 355 && scrollInfo.metrics.pixels <= 0) {
+                  if (carouselHeight != carouselHeightConstValue.h &&
+                      scrollInfo.metrics.pixels <= 0) {
                     setState(() {
-                      carouselHeight = 355;
+                      carouselHeight = carouselHeightConstValue.h;
                     });
                   }
                   return true;
@@ -180,8 +205,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   children: [
                     Text(
                       product.description,
-                      style: const TextStyle(
-                        fontSize: 13,
+                      style: TextStyle(
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w500,
                         color: Palette.kFontColorGray,
                       ),
@@ -192,17 +217,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ),
           SizedBox(
-            height: 230,
+            height: 230.h,
             width: double.infinity,
             child: DecoratedBox(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Palette.kPrimaryColor,
                 borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(40),
+                  top: const Radius.circular(40).r,
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: REdgeInsets.all(25.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -212,87 +237,69 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         Column(
                           children: [
                             SvgPicture.asset(
-                              "assets/icons/height_icon.svg",
+                              AssetsPath.kHeightIcon,
                               colorFilter: const ColorFilter.mode(
-                                Colors.white,
+                                Palette.kIconColorWhite,
                                 BlendMode.srcIn,
                               ),
-                              height: 35,
+                              height: 35.h,
+                              width: 35.w,
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const Text(
+                            5.verticalSpace,
+                            Text(
                               "Height",
-                              style: underCardTextStyle,
+                              style: bottomCardMainTextStyle,
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
+                            5.verticalSpace,
                             Text(
                               "${product.height[0].round()}cm - ${product.height[1].round()}cm",
-                              style: underCardTextStyle.copyWith(
-                                fontSize: 12,
-                                color: Colors.white60,
-                              ),
+                              style: bottomCardSubtleTextStyle,
                             ),
                           ],
                         ),
                         Column(
                           children: [
                             SvgPicture.asset(
-                              "assets/icons/temperature_icon.svg",
+                              AssetsPath.kTemperatureIcon,
                               colorFilter: const ColorFilter.mode(
-                                Colors.white,
+                                Palette.kIconColorWhite,
                                 BlendMode.srcIn,
                               ),
-                              height: 35,
+                              height: 35.h,
+                              width: 35.w,
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const Text(
+                            5.verticalSpace,
+                            Text(
                               "Temperature",
-                              style: underCardTextStyle,
+                              style: bottomCardMainTextStyle,
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
+                            5.verticalSpace,
                             Text(
                               "${product.temperature[0].round()}\u2103 - ${product.temperature[1].round()}\u2103",
-                              style: underCardTextStyle.copyWith(
-                                fontSize: 10,
-                                color: Colors.white60,
-                              ),
+                              style: bottomCardSubtleTextStyle,
                             ),
                           ],
                         ),
                         Column(
                           children: [
                             SvgPicture.asset(
-                              "assets/icons/plant_pot_icon.svg",
+                              AssetsPath.kPlantPotIcon,
                               colorFilter: const ColorFilter.mode(
-                                Colors.white,
+                                Palette.kIconColorWhite,
                                 BlendMode.srcIn,
                               ),
-                              height: 35,
+                              height: 35.h,
+                              width: 35.w,
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const Text(
+                            5.verticalSpace,
+                            Text(
                               "Pot",
-                              style: underCardTextStyle,
+                              style: bottomCardMainTextStyle,
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
+                            5.verticalSpace,
                             Text(
                               product.pot,
-                              style: underCardTextStyle.copyWith(
-                                fontSize: 12,
-                                color: Colors.white60,
-                              ),
+                              style: bottomCardSubtleTextStyle,
                             ),
                           ],
                         ),
@@ -304,24 +311,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         Padding(
                           padding: const EdgeInsets.only(
                             left: 20,
-                          ),
+                          ).w,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 "Total Price",
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.white,
+                                  color: Palette.kFontColorWhite,
                                 ),
                               ),
                               Text(
                                 "\$$totalPrice",
-                                style: const TextStyle(
-                                  fontSize: 18,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w700,
-                                  color: Colors.white,
+                                  color: Palette.kFontColorWhite,
                                 ),
                               ),
                             ],
@@ -331,18 +338,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           onTap: () {},
                           child: Container(
                             alignment: Alignment.center,
-                            height: 75,
-                            width: 180,
+                            height: 75.h,
+                            width: 180.w,
                             decoration: BoxDecoration(
                               color: Palette.kPrimaryDark,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20).r,
                             ),
-                            child: const Text(
+                            child: Text(
                               "Add to Cart",
                               style: TextStyle(
                                 color: Palette.kFontColorWhite,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 17,
+                                fontSize: 17.sp,
                               ),
                             ),
                           ),
